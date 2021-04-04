@@ -1,0 +1,15 @@
+void enrollStudent(CourseBST *self, StudenList studentID)
+{
+}
+
+void removeStudent(CourseBST *self, StudenList studentID)
+{
+}
+
+void showCourseSummary(CourseBST *self)
+{
+}
+
+void showStudentInCourse(CourseBST *self, String courseName)
+{
+}
