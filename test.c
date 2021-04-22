@@ -95,9 +95,22 @@ void insertCourse(CourseBST *self, String courseName)
 
 
 void print_pre_order_bst_node(BSTNodePtr self) {
+
+    ListNodePtr current_for_print;
+    current_for_print = malloc(sizeof *current_for_print);
+    
 	if (self != NULL) {
 	
-		printf("%s\n", self->course->name);
+		printf("%s ", self->course->name);
+
+        current_for_print = self->course->student->head;
+        while (current_for_print != NULL)
+        {
+            
+            printf("- %ld -", current_for_print->id);
+            current_for_print = current_for_print->nextNode;
+        }
+        printf("\n");
 		print_pre_order_bst_node(self->left);
 		print_pre_order_bst_node(self->right);
 		
@@ -152,38 +165,97 @@ void delete_bst(CourseBST* self, String courseName) {
 	self->root = deleteCourse(self->root, courseName);
 }
 
-
-void enrollStudent(BSTNodePtr self, String courseName, int studentID)
-{   
-
-    //find the courseName where the student will be enrolled into
-    //if found at the first node, insert student into that node
-    if(self == NULL || (strcmp(courseName, self->course->name) == 0))
-    {
-        
-        //insert into linkedlist by in order
-
-        //self->course->student->head->id = studentID;
-
-        
-    }
-    else if (strcmp(self->course->name, courseName) > 0)
-    {
-        enrollStudent(self->left, courseName, studentID);
-    }
-    else 
-    {
-        enrollStudent(self->right, courseName, studentID);
-    }
-
-}
-
 CourseBST newCourse()
 {
 	CourseBST temp;
 	temp.root = NULL;
 	return temp;
 }
+
+
+
+
+void enrollStudent(BSTNodePtr self, String courseName, int studentID)
+{
+    //find the bst node
+
+    if ((strcmp(courseName, self->course->name) == 0))
+    {
+        // found the course at the fisrt node
+
+        // insert student id into that node linkedlist
+
+        ListNodePtr new_student_node = malloc(sizeof(*new_student_node));
+        new_student_node->id = studentID;
+        new_student_node->nextNode = self->course->student->head;
+        self->course->student->head = new_student_node;
+      
+    }else if (strcmp(courseName, self->course->name) > 0) 
+    {
+	 enrollStudent(self->left, courseName, studentID);
+	}
+	else 
+    {
+	 enrollStudent(self->right, courseName, studentID);
+	}
+    
+
+}
+
+void enrollNewStudent(CourseBST *self, String courseName, int id)
+{
+    enrollStudent(self->root, courseName, id);
+}
+
+void unenrollStudent(BSTNodePtr self, String courseName, int studentID)
+{
+    //find the bst node
+
+    if ((strcmp(courseName, self->course->name) == 0))
+    {
+        // found the course at the fisrt node
+
+        // insert student id into that node linkedlist
+
+        ListNodePtr current = self->course->student->head;
+        ListNodePtr prev = NULL;
+
+        while (current!= NULL)
+        {
+            if (current->id == studentID)
+            {
+                if(prev == NULL)
+                {
+                    self->course->student->head = current->nextNode;
+                    free(current);
+                    current = self->course->student->head;
+                }else
+                {
+                    prev->nextNode = current->nextNode;
+                    free(current);
+                    current = prev->nextNode;
+                }
+            }
+            else
+            {
+                prev = current;
+                current = current->nextNode;
+            }
+        }
+      
+    }
+    
+
+}
+
+void unenrollNewStudent(CourseBST *self, String courseName, int id)
+{
+    unenrollStudent(self->root, courseName, id);
+}
+
+
+
+
 int main()
 {
 
@@ -191,16 +263,32 @@ int main()
 
 
     insertCourse(&myBST, "IT");
-    insertCourse(&myBST, "Nurse");
-    insertCourse(&myBST, "BUSINESS");
     insertCourse(&myBST, "ART");
+    insertCourse(&myBST,"LAW");
+   
+    
+    
+
+    enrollNewStudent(&myBST, "IT", 11);
+
+    enrollNewStudent(&myBST, "IT", 18);
+
+    enrollNewStudent(&myBST, "IT", 69);
+
+    enrollNewStudent(&myBST, "ART", 11);
+
+    enrollNewStudent(&myBST, "LAW", 77);
+
+    
+    print_pre_order_bst(&myBST);
+
+    printf("after unenrolled: \n");
+    unenrollNewStudent(&myBST, "IT", 18);
 
     print_pre_order_bst(&myBST);
 
-    printf("after deteled a course\n");
-    delete_bst(&myBST, "IT");
+    
 
-    print_pre_order_bst(&myBST);
+    //test insert BSTNode
+
 }
-
-//test insert BSTNode

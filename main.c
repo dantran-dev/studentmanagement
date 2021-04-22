@@ -18,7 +18,7 @@ int main()
         printf("3. Enroll a student\n");
         printf("4. Un-enroll a student\n");
         printf("5. Show courses summary in ordered\n");
-        printf("6. Show number of students by couse\n");
+        printf("6. Show number of students by course\n");
         printf("7. Show coursers enrolled by a student\n");
         printf("8. Quit\n");
 
