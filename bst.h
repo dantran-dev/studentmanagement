@@ -24,6 +24,4 @@ typedef struct bst
     BSTNodePtr root;
 } CourseBST;
 
-void addCourse(CourseBST *self, String courseName);
 
-void removeCourse(CourseBST *self);
