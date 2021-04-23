@@ -47,4 +47,6 @@ void enrollNewStudent(CourseBST *self, String courseName, int id);
 
 void unenrollNewStudent(CourseBST *self, String courseName, int id);
 
+void printInOrderCourse(CourseBST* self);
+
 //void enrollNewStudent(CourseBST *self, String courseName, int id);

@@ -254,6 +254,75 @@ void unenrollNewStudent(CourseBST *self, String courseName, int id)
 }
 
 
+void print_inorder_bst_node(BSTNodePtr self) 
+{
+    int counter = 0;
+
+    ListNodePtr current_for_print;
+    current_for_print = malloc(sizeof *current_for_print);
+    
+	if (self == NULL) {
+	
+		return;
+	}
+
+    print_inorder_bst_node(self->left);
+    current_for_print = self->course->student->head;
+
+    while (current_for_print != NULL)
+        {
+            counter = counter + 1;
+        
+            current_for_print = current_for_print->nextNode;
+        }
+    printf("%s has %d students \n", self->course->name, counter);
+    print_inorder_bst_node(self->right);
+
+	
+}
+
+void printInOrderCourse(CourseBST* self) {
+	print_inorder_bst_node(self->root);
+}
+
+
+void showEnrolledCourse(BSTNodePtr self, int studentID)
+{
+
+    ListNodePtr current_for_print;
+    current_for_print = malloc(sizeof *current_for_print);
+
+    
+    
+	if (self != NULL) {
+	
+		//printf("%s ", self->course->name);
+
+        current_for_print = self->course->student->head;
+        while (current_for_print != NULL)
+        {
+            
+            //printf("- %ld -", current_for_print->id);
+            //current_for_print = current_for_print->nextNode;
+
+            if (studentID == current_for_print->id)
+            {
+                printf("Student %d enrolled the course: %s - ", studentID, self->course->name);
+            }
+
+            current_for_print = current_for_print->nextNode;
+        }
+        printf("\n");
+		showEnrolledCourse(self->left, studentID);
+		showEnrolledCourse(self->right, studentID);
+		
+	}
+}
+
+
+void showEnrolledCoursesByStudentID(CourseBST* self, int studentID) {
+	showEnrolledCourse(self->root, studentID);
+}
 
 
 int main()
@@ -275,6 +344,8 @@ int main()
 
     enrollNewStudent(&myBST, "IT", 69);
 
+    enrollNewStudent(&myBST, "ART", 69);
+
     enrollNewStudent(&myBST, "ART", 11);
 
     enrollNewStudent(&myBST, "LAW", 77);
@@ -282,10 +353,10 @@ int main()
     
     print_pre_order_bst(&myBST);
 
-    printf("after unenrolled: \n");
-    unenrollNewStudent(&myBST, "IT", 18);
+   
+    printInOrderCourse(&myBST);
 
-    print_pre_order_bst(&myBST);
+    showEnrolledCoursesByStudentID(&myBST, 69);
 
     
 

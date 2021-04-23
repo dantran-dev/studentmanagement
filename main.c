@@ -93,7 +93,10 @@ int main()
                 
                 break;
             case 5:
-
+                printf("----------------------------------------------\n");
+                printf("Course summary in order\n");
+                printInOrderCourse(&myBST);
+                printf("----------------------------------------------\n");
 
                 
                 break;
@@ -108,6 +111,7 @@ int main()
             case 0:
                 printf("GoodBye!\n");
                 free(courseTitle);
+                
                 break;
             default:
                 printf("Wrong selection! Please try again \n");
