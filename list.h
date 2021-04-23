@@ -13,14 +13,8 @@ typedef struct list
 {
     ListNodePtr head;
 
-} StudentList;
+} *StudentList;
 
 StudentList newStudentList();
 
-void addStudentInFront(StudentList *self, long data);
 
-void removeStudentByID(StudentList *self, long data);
-
-void destroyStudentList(StudentList *self);
-
-int countStudent(StudentList *self);

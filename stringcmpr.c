@@ -27,7 +27,7 @@ int main()
 
 	courseName4 = "KFC";
 
-
+	printf("%s", courseName1);
 
 	// comparing strings str1 and str2
 	result1 = strcmp(courseName1, courseName4);

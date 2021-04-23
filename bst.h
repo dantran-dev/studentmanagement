@@ -1,4 +1,9 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "list.h"
+
 
 typedef char *String;
 
@@ -25,3 +30,17 @@ typedef struct bst
 } CourseBST;
 
 
+CourseBST newCourse();
+
+
+void insertCourse(CourseBST *self, String courseName);
+
+void printCourse(CourseBST* self);
+
+void deleteCourse(CourseBST* self, String courseName);
+
+void enrollNewStudent(CourseBST *self, String courseName, int id);
+
+void unenrollNewStudent(CourseBST *self, String courseName, int id);
+
+//void enrollNewStudent(CourseBST *self, String courseName, int id);
