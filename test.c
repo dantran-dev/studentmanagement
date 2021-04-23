@@ -299,15 +299,18 @@ void showEnrolledCourse(BSTNodePtr self, int studentID)
 		//printf("%s ", self->course->name);
 
         current_for_print = self->course->student->head;
+
+        
         while (current_for_print != NULL)
         {
             
             //printf("- %ld -", current_for_print->id);
             //current_for_print = current_for_print->nextNode;
-
+            
             if (studentID == current_for_print->id)
             {
-                printf("Student %d enrolled the course: %s - ", studentID, self->course->name);
+                printf("Student %d enrolled in: ", studentID);
+                printf(" -%s- ", self->course->name);
             }
 
             current_for_print = current_for_print->nextNode;
