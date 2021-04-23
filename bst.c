@@ -3,6 +3,10 @@
 #include <string.h>
 #include "bst.h"
 
+/*Assignment 2
+**Student Name: Tran Cong Danh
+**Student ID: 491554
+*/
 
 BSTNodePtr min_node(BSTNodePtr self) {
 	BSTNodePtr current = self;
@@ -147,11 +151,36 @@ void enrollStudent(BSTNodePtr self, String courseName, int studentID)
 
         // insert student id into that node linkedlist
 
+        /* it works here
+
         ListNodePtr new_student_node = malloc(sizeof(*new_student_node));
         new_student_node->id = studentID;
         new_student_node->nextNode = self->course->student->head;
         self->course->student->head = new_student_node;
-      
+        to here*/
+
+        //insert into linkedlist in order
+        ListNodePtr new_student_node = malloc(sizeof *new_student_node);
+        ListNodePtr current = self->course->student->head;
+        ListNodePtr prev = NULL;
+        new_student_node->id = studentID;
+        new_student_node->nextNode = NULL;
+
+
+        while (current != NULL && current->id < studentID) {
+        prev = current;
+        current = current->nextNode;
+        }
+
+        if (current == self->course->student->head) { // at front
+        new_student_node->nextNode = current;
+        self->course->student->head = new_student_node;
+        } 
+        else {                     // middle
+        new_student_node->nextNode = current;
+        prev->nextNode = new_student_node;
+        }
+
     }else if (strcmp(courseName, self->course->name) > 0) 
     {
 	 enrollStudent(self->left, courseName, studentID);

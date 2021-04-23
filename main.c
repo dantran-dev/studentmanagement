@@ -3,7 +3,10 @@
 #include <stdbool.h>
 #include "bst.h"
 
-
+/*Assignment 2
+**Student Name: Tran Cong Danh
+**Student ID: 491554
+*/
 
 
 
@@ -25,10 +28,10 @@ int main()
         printf("2. Remove a course\n");
         printf("3. Enroll a student\n");
         printf("4. Un-enroll a student\n");
-        printf("5. Show courses summary in ordered\n");
-        printf("6. Show number of students by course\n");
-        printf("7. Show coursers enrolled by a student\n");
-        printf("8. Quit\n");
+        printf("5. Show total student of courser in order\n");
+        printf("6. Show ordered list of students\n");
+        printf("7. Show courses enrolled by a student\n");
+        printf("0. Quit\n");
 
         printf("Please select an option:");
         scanf("%d", &choice);
@@ -61,10 +64,11 @@ int main()
                 break;
             case 3:
                 courseTitle = malloc(sizeof *courseTitle);
-                printf("Please enter course name to enroll student:");
-                scanf("%s", courseTitle);
                 printf("Please enter student ID to enroll:");
                 scanf("%d", &studentNo);
+                printf("Please enter course name to enroll student:");
+                scanf("%s", courseTitle);
+                
 
                 enrollNewStudent(&myBST, courseTitle, studentNo);
                 printf("----------------------------------------------\n");
@@ -74,11 +78,12 @@ int main()
                 
                 break;
             case 4:
+                printf("Please enter student ID to unenroll:");
+                scanf("%d", &studentNo);
                 courseTitle = malloc(sizeof *courseTitle);
                 printf("Please enter course name to unenroll a student:");
                 scanf("%s", courseTitle);
-                printf("Please enter student ID to unenroll:");
-                scanf("%d", &studentNo);
+                
 
                 unenrollNewStudent(&myBST, courseTitle, studentNo);
                 printf("----------------------------------------------\n");
@@ -88,12 +93,20 @@ int main()
                 
                 break;
             case 5:
+
+
+                
                 break;
             case 6:
+                printf("---------------------------------------------------\n");
+                printf("Course summarry with ordered Student ID\n");
+                printCourse(&myBST);
+                printf("---------------------------------------------------\n");
                 break;
             case 7:
                 break;
-            case 8:
+            case 0:
+                printf("GoodBye!\n");
                 free(courseTitle);
                 break;
             default:
@@ -101,7 +114,7 @@ int main()
             
         }
 
-    } while (choice != 8);
+    } while (choice != 0);
 
     return 0;
 

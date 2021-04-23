@@ -4,6 +4,10 @@
 #include <string.h>
 #include "list.h"
 
+/*Assignment 2
+**Student Name: Tran Cong Danh
+**Student ID: 491554
+*/
 
 typedef char *String;
 
